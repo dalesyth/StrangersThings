@@ -1,9 +1,9 @@
 
 
-const root = () => {
+const Root = () => {
   return (
     <div>root</div>
   )
 }
 
-export default root
+export default Root
