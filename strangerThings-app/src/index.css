@@ -9,7 +9,14 @@
 /* base styles */
 * {
   margin: 0;
+  box-sizing: border-box;
   font-family: "Quicksand";
   color: #333;
 }
+
+body {
+  background: linear-gradient(#e66465, #9198e5);
+}
+
+
 

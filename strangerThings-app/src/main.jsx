@@ -3,7 +3,9 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Root from "./routes/root";
-import Navbar from "./Components/Navbar";
+import Home from "./Components/Home";
+import Login from "./Components/Login";
+import Posts from "./Components/Posts";
 
 const router = createBrowserRouter([
   {
@@ -11,8 +13,16 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: "./components/navbar",
-        element: <Navbar />,
+        path: "/Login",
+        element: <Login />,
+      },
+      {
+        path: "/Home",
+        element: <Home />,
+      },
+      {
+        path: "/Posts",
+        element: <Posts />,
       },
     ],
   },
