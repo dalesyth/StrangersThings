@@ -9,7 +9,7 @@ const Root = () => {
       <div className="container h-screen justify-center mx-auto p-2">
         <Outlet />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

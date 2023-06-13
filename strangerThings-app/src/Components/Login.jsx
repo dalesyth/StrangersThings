@@ -1,6 +1,9 @@
-import React from "react";
+import { useState } from "react";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className="Container w-1/2 h-1/2 flex justify-center items-center m-auto mt-10 p-8 bg-gray-100 shadow-lg">
       <div className="login max-w-md w-full">
@@ -14,6 +17,10 @@ const Login = () => {
               className="w-full rounded shadow-lg"
               type="username"
               id="username"
+              value={username}
+              onChange={(event) => {
+                setUsername(event.target.value);
+              }}
               required
             ></input>
           </div>
@@ -25,6 +32,10 @@ const Login = () => {
               className="w-full rounded shadow-lg"
               type="password"
               id="password"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
               required
             ></input>
           </div>

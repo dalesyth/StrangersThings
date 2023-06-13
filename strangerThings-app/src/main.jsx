@@ -7,6 +7,7 @@ import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Posts from "./Components/Posts";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
