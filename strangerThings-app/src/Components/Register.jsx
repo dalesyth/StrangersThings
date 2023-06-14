@@ -1,9 +1,12 @@
 import { useState } from "react";
 
-
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState(null);
+
+  const cohortName = "2303-mt-ftb-web-pt";
+  const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
@@ -13,18 +16,45 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("handleSubmit function invoked");
-  };
 
-  console.log("username: ", username);
-  console.log("password :", password);
+    const registerUser = async () => {
+      try {
+        const response = await fetch(`${APIURL}/users/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user: {
+              username,
+              password,
+            },
+          }),
+        });
+        const result = await response.json();
+
+        // console.log("Result from register user ", result);
+        setToken(result.data.token);
+        // console.log(token)
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    registerUser();
+
+    // console.log("token is ", token);
+
+    setUsername("");
+    setPassword("");
+  };
 
   return (
     <div className="Container w-1/2 h-1/2 flex justify-center items-center m-auto mt-10 p-8 bg-gray-100 shadow-lg">
       <div className="login max-w-md w-full">
-        <h1 className="text-3xl text-center font-bold mb-4">Login</h1>
+        <h1 className="text-3xl text-center font-bold mb-4">Register</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block mb-2" htmlFor="username">
@@ -66,4 +96,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

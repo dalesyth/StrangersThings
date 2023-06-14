@@ -5,7 +5,7 @@ const Posts = () => {
   const cohortName = "2303-mt-ftb-web-pt";
   const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-  console.log("posts: ", posts);
+  // console.log("posts: ", posts);
 
   useEffect(() => {
     const fetchPosts = async () => {
