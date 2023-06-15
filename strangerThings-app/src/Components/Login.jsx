@@ -1,9 +1,15 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState(null);
+
+  const cohortName = "2303-mt-ftb-web-pt";
+  const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
+
+  console.log("console.log#3, token is", token);
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
@@ -15,11 +21,38 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("handleSubmit function invoked");
-  };
+    // console.log("handleSubmit function invoked");
 
-  console.log("username: ", username);
-  console.log("password :", password);
+    const loginUser = async () => {
+      try {
+        const response = await fetch(`${APIURL}/users/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user: {
+              username,
+              password,
+            },
+          }),
+        });
+        const result = await response.json();
+        console.log("Result from login ", result);
+        setToken(result.data.token);
+        console.log("console.log#1, token is", token);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    loginUser();
+
+    console.log("console.log#2, token is", token);
+
+    setUsername("");
+    setPassword("");
+  };
 
   return (
     <div className="Container w-1/2 h-1/2 flex justify-center items-center m-auto mt-10 p-8 bg-gray-100 shadow-lg">
@@ -59,6 +92,12 @@ const Login = () => {
             >
               SUBMIT
             </button>
+            <Link
+              to="/register"
+              className="underline flex justify-center pt-6 text-blue-600"
+            >
+              Don't have an account? Click here to register
+            </Link>
           </div>
         </form>
       </div>

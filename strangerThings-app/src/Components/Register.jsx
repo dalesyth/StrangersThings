@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -7,6 +8,8 @@ const Register = () => {
 
   const cohortName = "2303-mt-ftb-web-pt";
   const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
+
+  console.log("console.log#3, token is", token);
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
@@ -35,9 +38,9 @@ const Register = () => {
         });
         const result = await response.json();
 
-        // console.log("Result from register user ", result);
+        console.log("Result from register user ", result);
         setToken(result.data.token);
-        // console.log(token)
+        console.log("console.log#1, token is ", token);
       } catch (err) {
         console.error(err);
       }
@@ -45,7 +48,7 @@ const Register = () => {
 
     registerUser();
 
-    // console.log("token is ", token);
+    console.log("console.log#2, token is ", token);
 
     setUsername("");
     setPassword("");
@@ -89,6 +92,12 @@ const Register = () => {
             >
               SUBMIT
             </button>
+            <Link
+              to="/login"
+              className="underline flex justify-center pt-6 text-blue-600"
+            >
+              Already have an account? Log in here
+            </Link>
           </div>
         </form>
       </div>
