@@ -14,7 +14,6 @@ const Navbar = () => {
         <Link to="/login" className="no-underline p-6">
           Log In
         </Link>
-        
       </div>
     </nav>
   );
