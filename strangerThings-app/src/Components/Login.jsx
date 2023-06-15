@@ -11,6 +11,8 @@ const Login = () => {
 
   console.log("console.log#3, token is", token);
 
+  localStorage.setItem("token", token);
+
   const handleUsername = (event) => {
     setUsername(event.target.value);
   };
@@ -40,6 +42,8 @@ const Login = () => {
         const result = await response.json();
         console.log("Result from login ", result);
         setToken(result.data.token);
+        // localStorage.setItem("token", token);
+        alert(result.data.message);
         console.log("console.log#1, token is", token);
       } catch (err) {
         console.error(err);

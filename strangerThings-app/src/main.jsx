@@ -30,9 +30,10 @@ const router = createBrowserRouter([
         path: "/Register",
         element: <Register />,
       },
+
       {
         path: "CreatePost",
-        element: <CreatePost />
+        element: <CreatePost />,
       },
     ],
   },

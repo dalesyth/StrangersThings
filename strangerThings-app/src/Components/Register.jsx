@@ -40,6 +40,8 @@ const Register = () => {
 
         console.log("Result from register user ", result);
         setToken(result.data.token);
+        localStorage.setItem("token", token);
+        alert(result.data.message);
         console.log("console.log#1, token is ", token);
       } catch (err) {
         console.error(err);

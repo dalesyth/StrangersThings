@@ -3,9 +3,15 @@ import { useState } from "react";
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(null);
+  const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
-  const [isChecked, setIsChecked] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+
+  const cohortName = "2303-mt-ftb-web-pt";
+  const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
+  const token = localStorage.getItem("token");
+
+  console.log("token is ", token);
 
   const handleTitle = (event) => {
     setTitle(event.target.value);
@@ -29,6 +35,37 @@ const CreatePost = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const makePost = async () => {
+      try {
+        const response = await fetch(`${APIURL}/posts`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            post: {
+              title,
+              description,
+              price,
+              willDeliver: isChecked,
+            },
+          }),
+        });
+        const result = await response.json();
+        console.log(result);
+        return result;
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    makePost();
+    setTitle("");
+    setDescription("");
+    setPrice("");
+    setLocation("");
+    setIsChecked(false);
   };
 
   return (
