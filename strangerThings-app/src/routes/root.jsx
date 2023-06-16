@@ -5,7 +5,7 @@ const Root = () => {
   return (
     <>
       <Navbar />
-      <div className="container h-screen justify-center mx-auto p-2 overflow-y-scroll">
+      <div className="container h-screen justify-center mx-auto p-2 overflow-y-auto">
         <Outlet />
       </div>
     </>

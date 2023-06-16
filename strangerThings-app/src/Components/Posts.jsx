@@ -5,6 +5,7 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
   const cohortName = "2303-mt-ftb-web-pt";
   const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
+  const token = localStorage.getItem("token");
 
   console.log("posts: ", posts);
 
@@ -33,7 +34,24 @@ const Posts = () => {
       }
     };
     fetchPosts();
-  });
+  }, []);
+
+  const deletePost = async () => {
+    try {
+      const response = await fetch(`${APIURL}/posts/5e8d1bd48829fb0017d2233b`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const result = await response.json();
+      console.log(result);
+      return result;
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="Container max-w-screen-lg flex-col justify-center max-auto p-8 h-screen">
@@ -60,9 +78,22 @@ const Posts = () => {
               <div>
                 <span className="font-bold">Location:</span> {post.location}
               </div>
-              <button className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5">
+              <div>
+                <span>
+                  <button className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5">
+                    SEND MESSAGE
+                  </button>
+                  <button
+                    onClick={deletePost}
+                    className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5"
+                  >
+                    DELETE POST
+                  </button>
+                </span>
+              </div>
+              {/* <button className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5">
                 SEND MESSAGE
-              </button>
+              </button> */}
             </div>
           ))}
       </div>
