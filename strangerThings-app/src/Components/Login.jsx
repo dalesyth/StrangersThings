@@ -23,7 +23,7 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("handleSubmit function invoked");
+    
 
     const loginUser = async () => {
       try {

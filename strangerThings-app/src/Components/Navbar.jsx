@@ -6,10 +6,10 @@ const Navbar = () => {
       <h1 className="text-pink-600 text-xl font-bold">Stranger's Things</h1>
       <div className="links">
         <Link
-          to="/home"
+          to="/messages"
           className="no-underline p-6 hover:text-blue-600 hover:font-bold"
         >
-          Home
+          Messages
         </Link>
         <Link to="/posts" className="no-underline p-6 hover:text-blue-600">
           Posts

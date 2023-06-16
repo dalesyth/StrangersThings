@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import SendMessage from "./SendMessage";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
@@ -8,18 +9,6 @@ const Posts = () => {
   const token = localStorage.getItem("token");
 
   console.log("posts: ", posts);
-
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     const response = await fetch(`${APIURL}/posts`);
-  //     // console.log("response: ", response)
-  //     const data = await response.json();
-  //     const allPosts = data.data.posts;
-  //     setPosts(allPosts);
-  //     // console.log(data)
-  //   };
-  //   fetchPosts();
-  // }, []);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -36,9 +25,10 @@ const Posts = () => {
     fetchPosts();
   }, []);
 
-  const deletePost = async () => {
+  const deletePost = async (postId) => {
+    console.log("Post ID is :", postId);
     try {
-      const response = await fetch(`${APIURL}/posts/5e8d1bd48829fb0017d2233b`, {
+      const response = await fetch(`${APIURL}/posts/${postId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -65,9 +55,10 @@ const Posts = () => {
       <div className="container mx-auto">
         {posts &&
           posts.map((post) => (
-            <div className="bg-gray-200 my-5 shadow-lg p-3" key={post.id}>
+            <div className="bg-gray-200 my-5 shadow-lg p-3" key={post._id}>
               <h3 className="font-bold underline mb-3">{post.title}</h3>
               <div>{post.description}</div>
+              {/* <div>Post ID is {post._id}</div> */}
               <div>
                 <span className="font-bold">Price:</span> {post.price}
               </div>
@@ -80,42 +71,24 @@ const Posts = () => {
               </div>
               <div>
                 <span>
-                  <button className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5">
-                    SEND MESSAGE
-                  </button>
+                  {localStorage.setItem("postId", post._id)}
+                  <Link to="/sendmessage">
+                    <button className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5">
+                      SEND MESSAGE
+                    </button>
+                  </Link>
+
                   <button
-                    onClick={deletePost}
+                    onClick={() => deletePost(post._id)}
                     className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5"
                   >
                     DELETE POST
                   </button>
                 </span>
               </div>
-              {/* <button className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5">
-                SEND MESSAGE
-              </button> */}
             </div>
           ))}
       </div>
-      {/* {posts &&
-        posts.map((post) => (
-          <div className="bg-gray-200 my-5 shadow-lg p-3" key={post.id}>
-            <h3 className="font-bold underline mb-3">{post.title}</h3>
-            <div>{post.description}</div>
-            <div>
-              <span className="font-bold">Price:</span> {post.price}
-            </div>
-            <div>
-              <span className="font-bold">Seller:</span> {post.author.username}
-            </div>
-            <div>
-              <span className="font-bold">Location:</span> {post.location}
-            </div>
-            <button className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5">
-              SEND MESSAGE
-            </button>
-          </div>
-        ))} */}
     </div>
   );
 };
