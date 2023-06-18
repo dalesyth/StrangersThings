@@ -39,7 +39,14 @@ const CreatePost = () => {
 
     const handleCreatePost = async () => {
       try {
-        const response = await createPost(title, description, price, location, isChecked);
+        const response = await createPost(
+          token,
+          title,
+          description,
+          price,
+          location,
+          isChecked
+        );
 
         console.log("Result in handleCreatePost", response);
       } catch (err) {

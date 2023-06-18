@@ -48,6 +48,7 @@ const Home = () => {
             to see your messages and posts
           </div>
         )}
+
         <h1 className="text-center text-3xl font-bold pb-10 text-white">
           My Messages
         </h1>
@@ -72,6 +73,7 @@ const Home = () => {
         <h1 className="text-center text-3xl font-bold pb-10 text-white">
           My Posts
         </h1>
+
         <div className="container mx-auto">
           {posts &&
             posts.map((post) => (

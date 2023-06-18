@@ -5,7 +5,8 @@ import { loginUser } from "./ApiCalls";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(null);
+  
   const navigate = useNavigate();
 
   console.log("token is", token);
@@ -30,11 +31,12 @@ const Login = () => {
       console.log("Result in Component: ", response);
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
+      // console.log("token is: ", token)
       alert("You are now logged in");
     } catch (err) {
       console.error(err);
     }
-
+   
     setUsername("");
     setPassword("");
     navigate('/home')

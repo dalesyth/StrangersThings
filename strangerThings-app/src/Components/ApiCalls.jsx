@@ -2,56 +2,54 @@ const cohortName = "2303-mt-ftb-web-pt";
 const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 const token = localStorage.getItem("token");
 
-
 export async function registerUser(username, password) {
-    try {
-        const response = await fetch(`${APIURL}/users/register`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            user: {
-              username,
-              password,
-            },
-          }),
-        });
-        const result = await response.json();
+  try {
+    const response = await fetch(`${APIURL}/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: {
+          username,
+          password,
+        },
+      }),
+    });
+    const result = await response.json();
 
-        console.log("Result from register user ", result);
-        return result;
-        
-      } catch (err) {
-        console.error(err);
-      }
+    console.log("Result from register user ", result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export async function loginUser(username, password) {
-    try {
-        const response = await fetch(`${APIURL}/users/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            user: {
-              username,
-              password,
-            },
-          }),
-        });
-        const result = await response.json();
+  try {
+    const response = await fetch(`${APIURL}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: {
+          username,
+          password,
+        },
+      }),
+    });
+    const result = await response.json();
 
-        console.log("Result from login user ", result);
-        return result;
-        
-      } catch (err) {
-        console.error(err);
-      }
+    console.log("Result from login user ", result);
+    // localStorage.setItem("token in api call is: ", response.data.token);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-export async function fetchPosts(){
+export async function fetchPosts() {
   try {
     const response = await fetch(`${APIURL}/posts`);
 
@@ -61,10 +59,16 @@ export async function fetchPosts(){
   } catch (err) {
     console.error(err);
   }
-
 }
 
-export async function createPost(title, description, price, location, isChecked) {
+export async function createPost(
+  token,
+  title,
+  description,
+  price,
+  location,
+  isChecked
+) {
   try {
     const response = await fetch(`${APIURL}/posts`, {
       method: "POST",
@@ -90,8 +94,7 @@ export async function createPost(title, description, price, location, isChecked)
   }
 }
 
-export async function deletePost(postId){
-  
+export async function deletePost(postId, token) {
   try {
     const response = await fetch(`${APIURL}/posts/${postId}`, {
       method: "DELETE",
@@ -106,10 +109,9 @@ export async function deletePost(postId){
   } catch (err) {
     console.error(err);
   }
-
 }
 
-export async function sendMessage(postId, content){
+export async function sendMessage(postId, content) {
   try {
     const response = await fetch(`${APIURL}/posts/${postId}/messages`, {
       method: "POST",
@@ -129,8 +131,4 @@ export async function sendMessage(postId, content){
   } catch (err) {
     console.error(err);
   }
-
-
 }
-
-

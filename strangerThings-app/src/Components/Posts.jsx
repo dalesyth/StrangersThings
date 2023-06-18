@@ -4,6 +4,7 @@ import { fetchPosts, deletePost } from "./ApiCalls";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
+  const token = localStorage.getItem("token")
 
   console.log("posts: ", posts);
 
@@ -31,11 +32,11 @@ const Posts = () => {
     );
   };
 
-  const handleDeletePost = async (postId) => {
+  const handleDeletePost = async (postId, token) => {
     console.log("DeletePost postId is: ", postId);
 
     try {
-      const response = await deletePost(postId);
+      const response = await deletePost(postId, token);
 
       console.log("Result in handleDeletePost: ", response);
     } catch (err) {
@@ -90,7 +91,7 @@ const Posts = () => {
                       </Link>
 
                       <button
-                        onClick={() => handleDeletePost(post._id)}
+                        onClick={() => handleDeletePost(post._id, token)}
                         className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5"
                       >
                         DELETE POST

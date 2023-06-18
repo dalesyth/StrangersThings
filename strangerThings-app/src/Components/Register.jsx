@@ -34,7 +34,7 @@ const Register = () => {
 
     setUsername("");
     setPassword("");
-    navigate('/login')
+    navigate('/home')
   };
 
   return (
