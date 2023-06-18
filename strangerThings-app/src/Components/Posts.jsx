@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchPosts, deletePost } from "./ApiCalls";
+import SendMessage from "./SendMessage";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   console.log("posts: ", posts);
 
@@ -20,16 +22,14 @@ const Posts = () => {
       }
     };
     getPosts();
-  }, [posts]);
+  }, []);
 
-  const handleSubmit = (event, postId) => {
-    event.preventDefault();
-    console.log(
-      "handleSubmit value: ",
-      event.target.value,
-      "post ID: ",
-      postId
-    );
+  const handleSendMessage = (postId, token) => {
+    console.log("post ID: ", postId, "token is: ", token);
+    localStorage.setItem("postId", postId)
+    navigate('/SendMessage')
+
+
   };
 
   const handleDeletePost = async (postId, token) => {
@@ -62,7 +62,7 @@ const Posts = () => {
                 <h3 className="font-bold underline mb-3">{post.title}</h3>
                 <div>{post.description}</div>
                 <div>Post ID is {post._id}</div>
-                {localStorage.setItem("postId", post._id)}
+                {/* {localStorage.setItem("postId", post._id)} */}
 
                 <div>
                   <span className="font-bold">Price:</span> {post.price}
@@ -81,14 +81,15 @@ const Posts = () => {
                 <div>
                   <>
                     <span>
-                      <Link to="/sendmessage">
-                        <button
-                          onClick={localStorage.setItem("postId", post._Id)}
-                          className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5"
-                        >
-                          SEND MESSAGE
-                        </button>
-                      </Link>
+                      {/* <Link to="/sendmessage"> */}
+                      <button
+                        // onClick={localStorage.setItem("postId", post._Id)}
+                        onClick={() => handleSendMessage(post._id, token)}
+                        className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5"
+                      >
+                        SEND MESSAGE
+                      </button>
+                      {/* </Link> */}
 
                       <button
                         onClick={() => handleDeletePost(post._id, token)}

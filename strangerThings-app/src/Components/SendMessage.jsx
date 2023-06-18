@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { sendMessage } from "./ApiCalls";
 
 const SendMessage = () => {
   const [content, setContent] = useState("");
   const postId = localStorage.getItem("postId");
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
-  console.log("Post ID is: ", postId)
+  console.log("Post ID in sendMessage func is: ", postId);
 
   const handleMessage = (event) => {
     setContent(event.target.value);
@@ -14,20 +17,18 @@ const SendMessage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-   
-
     try {
-      const response = await sendMessage(postId, content);
+      const response = await sendMessage(postId, content, token);
 
       console.log("Result in component: ", response);
-      alert("Message Sent")
+      alert("Message Sent");
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
 
-
-    
     setContent("");
+    alert("Message sent");
+    navigate("/posts");
   };
 
   return (
@@ -66,9 +67,5 @@ const SendMessage = () => {
 };
 
 export default SendMessage;
-
-
-
-
 
 // Post ID is:  6487d2ac0911550014fe1621

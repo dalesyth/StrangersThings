@@ -42,7 +42,7 @@ export async function loginUser(username, password) {
     const result = await response.json();
 
     console.log("Result from login user ", result);
-    // localStorage.setItem("token in api call is: ", response.data.token);
+    
     return result;
   } catch (err) {
     console.error(err);
@@ -111,7 +111,7 @@ export async function deletePost(postId, token) {
   }
 }
 
-export async function sendMessage(postId, content) {
+export async function sendMessage(postId, content, token) {
   try {
     const response = await fetch(`${APIURL}/posts/${postId}/messages`, {
       method: "POST",
