@@ -1,47 +1,32 @@
 import { useState } from "react";
+import { sendMessage } from "./ApiCalls";
 
 const SendMessage = () => {
   const [content, setContent] = useState("");
-  const cohortName = "2303-mt-ftb-web-pt";
-  const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
-  const token = localStorage.getItem("token");
   const postId = localStorage.getItem("postId");
-  
+
+  console.log("Post ID is: ", postId)
 
   const handleMessage = (event) => {
     setContent(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+   
+
+    try {
+      const response = await sendMessage(postId, content);
+
+      console.log("Result in component: ", response);
+      alert("Message Sent")
+    } catch (err) {
+      console.error(err)
+    }
+
+
     
-
-    const postMessage = async () => {
-
-      try {
-        const response = await fetch(
-          `${APIURL}/posts/${postId}/messages`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              message: {
-                content,
-              },
-            }),
-          }
-        );
-        const result = await response.json();
-        console.log(result);
-        return result;
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    postMessage();
     setContent("");
   };
 
@@ -81,3 +66,9 @@ const SendMessage = () => {
 };
 
 export default SendMessage;
+
+
+
+
+
+// Post ID is:  6487d2ac0911550014fe1621

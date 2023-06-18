@@ -3,12 +3,13 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Root from "./routes/root";
-import Messages from "./Components/Messages";
+import Home from "./Components/Home"
 import Login from "./Components/Login";
+import Logout from "./Components/Logout";
 import Posts from "./Components/Posts";
 import Register from "./Components/Register";
 import CreatePost from "./Components/CreatePost";
-import EditPost from "./Components/EditPost";
+
 import SendMessage from "./Components/SendMessage";
 
 const router = createBrowserRouter([
@@ -21,8 +22,13 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/Messages",
-        element: <Messages />,
+        path: "/Logout",
+        element: <Logout />,
+      },
+
+      {
+        path: "/Home",
+        element: <Home />,
       },
       {
         path: "/Posts",
@@ -37,14 +43,11 @@ const router = createBrowserRouter([
         path: "CreatePost",
         element: <CreatePost />,
       },
-      {
-        path: "EditPost",
-        element: <EditPost />,
-      },
+
       {
         path: "SendMessage",
-        element: <SendMessage />
-      }
+        element: <SendMessage />,
+      },
     ],
   },
 ]);

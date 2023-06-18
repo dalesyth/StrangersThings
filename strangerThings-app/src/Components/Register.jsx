@@ -1,15 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "./ApiCalls";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const navigate = useNavigate();
 
-  const cohortName = "2303-mt-ftb-web-pt";
-  const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
-
-  console.log("console.log#3, token is", token);
+  console.log("token is", token);
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
@@ -22,38 +21,20 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const registerUser = async () => {
-      try {
-        const response = await fetch(`${APIURL}/users/register`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            user: {
-              username,
-              password,
-            },
-          }),
-        });
-        const result = await response.json();
+    try {
+      const response = await registerUser(username, password);
 
-        console.log("Result from register user ", result);
-        setToken(result.data.token);
-        localStorage.setItem("token", token);
-        alert(result.data.message);
-        console.log("console.log#1, token is ", token);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    registerUser();
-
-    console.log("console.log#2, token is ", token);
+      console.log("Result in Component: ", response);
+      setToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
+      alert("You are now registered");
+    } catch (err) {
+      console.error(err);
+    }
 
     setUsername("");
     setPassword("");
+    navigate('/login')
   };
 
   return (

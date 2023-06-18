@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { createPost } from "./ApiCalls";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -6,9 +8,8 @@ const CreatePost = () => {
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate();
 
-  const cohortName = "2303-mt-ftb-web-pt";
-  const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
   const token = localStorage.getItem("token");
 
   console.log("token is ", token);
@@ -36,36 +37,22 @@ const CreatePost = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const makePost = async () => {
+    const handleCreatePost = async () => {
       try {
-        const response = await fetch(`${APIURL}/posts`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            post: {
-              title,
-              description,
-              price,
-              willDeliver: isChecked,
-            },
-          }),
-        });
-        const result = await response.json();
-        console.log(result);
-        return result;
+        const response = await createPost(title, description, price, location, isChecked);
+
+        console.log("Result in handleCreatePost", response);
       } catch (err) {
         console.error(err);
       }
     };
-    makePost();
+    handleCreatePost(title, description, price, isChecked);
     setTitle("");
     setDescription("");
     setPrice("");
     setLocation("");
     setIsChecked(false);
+    navigate("/posts");
   };
 
   return (
