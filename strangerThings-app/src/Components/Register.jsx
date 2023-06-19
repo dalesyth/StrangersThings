@@ -34,7 +34,8 @@ const Register = () => {
 
     setUsername("");
     setPassword("");
-    navigate('/home')
+    localStorage.setItem("username", username);
+    navigate("/home");
   };
 
   return (

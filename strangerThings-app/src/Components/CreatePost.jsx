@@ -12,8 +12,6 @@ const CreatePost = () => {
 
   const token = localStorage.getItem("token");
 
-  console.log("token is ", token);
-
   const handleTitle = (event) => {
     setTitle(event.target.value);
   };

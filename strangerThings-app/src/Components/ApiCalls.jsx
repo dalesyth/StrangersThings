@@ -1,6 +1,5 @@
 const cohortName = "2303-mt-ftb-web-pt";
 const APIURL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
-// const token = localStorage.getItem("token");
 
 export async function registerUser(username, password) {
   try {
@@ -18,7 +17,6 @@ export async function registerUser(username, password) {
     });
     const result = await response.json();
 
-    console.log("Result from register user ", result);
     return result;
   } catch (err) {
     console.error(err);
@@ -41,8 +39,6 @@ export async function loginUser(username, password) {
     });
     const result = await response.json();
 
-    console.log("Result from login user ", result);
-    
     return result;
   } catch (err) {
     console.error(err);
@@ -54,7 +50,7 @@ export async function fetchPosts() {
     const response = await fetch(`${APIURL}/posts`);
 
     const result = await response.json();
-    console.log("fetchPosts result: ", result.data.posts);
+
     return result;
   } catch (err) {
     console.error(err);
@@ -87,7 +83,7 @@ export async function createPost(
       }),
     });
     const result = await response.json();
-    console.log(result);
+
     return result;
   } catch (err) {
     console.error(err);
@@ -104,7 +100,7 @@ export async function deletePost(postId, token) {
       },
     });
     const result = await response.json();
-    console.log(result);
+
     return result;
   } catch (err) {
     console.error(err);
@@ -126,7 +122,7 @@ export async function sendMessage(postId, content, token) {
       }),
     });
     const result = await response.json();
-    console.log(result);
+
     return result;
   } catch (err) {
     console.error(err);
@@ -140,12 +136,9 @@ export async function editPost(
   description,
   price,
   location,
-  isChecked,
+  isChecked
 ) {
   try {
-    // You will need to insert a variable into the fetch template literal
-    // in order to make the POST_ID dynamic.
-    // 5e8d1bd48829fb0017d2233b is just for demonstration.
     const response = await fetch(`${APIURL}/posts/${postId}`, {
       method: "PATCH",
       headers: {
@@ -163,7 +156,7 @@ export async function editPost(
       }),
     });
     const result = await response.json();
-    console.log(result);
+
     return result;
   } catch (err) {
     console.error(err);

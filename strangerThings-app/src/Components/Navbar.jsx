@@ -2,11 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  
-  console.log("token in navbar is: ", token);
+  // const [token, setToken] = useState(localStorage.getItem("token"));
 
-  // {token ? setIsLoggedIn(true) : setIsLoggedIn(false)}
+  // console.log("token in navbar is: ", token);
 
   return (
     <nav className="navbar p-8 flex justify-between items-center max-w-screen-lg mx-auto border-b border-gray-200 bg-gray-200 shadow-lg">
@@ -21,7 +19,7 @@ const Navbar = () => {
         <Link to="/posts" className="no-underline p-6 hover:text-blue-600">
           Posts
         </Link>
-        
+
         <Link to="/login" className="no-underline p-6 hover:text-blue-600">
           Log In
         </Link>

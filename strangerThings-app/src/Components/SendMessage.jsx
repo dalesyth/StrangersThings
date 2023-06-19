@@ -67,5 +67,3 @@ const SendMessage = () => {
 };
 
 export default SendMessage;
-
-// Post ID is:  6487d2ac0911550014fe1621

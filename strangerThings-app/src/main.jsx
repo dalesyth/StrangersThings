@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Root from "./routes/root";
-import Home from "./Components/Home"
+import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Logout from "./Components/Logout";
 import Posts from "./Components/Posts";
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
       {
         path: "EditPost",
         element: <EditPost />,
-      }
+      },
     ],
   },
 ]);

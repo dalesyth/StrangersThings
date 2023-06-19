@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -39,7 +39,8 @@ const Home = () => {
       <div className="Container max-w-screen-lg flex-col justify-center p-8 h-screen">
         {token ? (
           <div className="text-white text-xl font-bold flex justify-center underline pb-5">
-            Welcome,{" "}<span className="text-green-300">{userName}</span>!{" "}please see your messages and posts below
+            Welcome, <span className="text-green-300">{userName}</span>! please
+            see your messages and posts below
           </div>
         ) : (
           <div className="text-white font-bold flex justify-center underline pb-5">
@@ -62,10 +63,7 @@ const Home = () => {
                 <h3 className="font-bold underline mb-3">
                   {message.post.title}
                 </h3>
-                <div className="font=bold">
-                  {/* <span className="font-bold">From:</span>{" "} */}
-                  {message.content}
-                </div>
+                <div className="font=bold">{message.content}</div>
                 <div className="font=bold">
                   <span className="font-bold">From:</span>{" "}
                   {message.fromUser.username}

@@ -12,8 +12,6 @@ const EditPost = () => {
   const postId = localStorage.getItem("postId");
   const token = localStorage.getItem("token");
 
-  console.log("postId in EditPost component is: ", postId);
-
   const handleTitle = (event) => {
     setTitle(event.target.value);
   };
@@ -148,5 +146,3 @@ const EditPost = () => {
 };
 
 export default EditPost;
-
-// post ID:  648e9f35cf0dba001419d6a1
