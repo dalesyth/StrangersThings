@@ -26,10 +26,14 @@ const Posts = () => {
 
   const handleSendMessage = (postId, token) => {
     console.log("post ID: ", postId, "token is: ", token);
-    localStorage.setItem("postId", postId)
-    navigate('/SendMessage')
+    localStorage.setItem("postId", postId);
+    navigate("/SendMessage");
+  };
 
-
+  const handleEditPost = (postId, token) => {
+    console.log("post ID: ", postId, "token is: ", token);
+    localStorage.setItem("postId", postId);
+    navigate("/EditPost");
   };
 
   const handleDeletePost = async (postId, token) => {
@@ -90,6 +94,13 @@ const Posts = () => {
                         SEND MESSAGE
                       </button>
                       {/* </Link> */}
+                      <button
+                        // onClick={localStorage.setItem("postId", post._Id)}
+                        onClick={() => handleEditPost(post._id, token)}
+                        className="w-1/6 shadow-lg border rounded mt-5 bg-blue-500 hover:bg-blue-600 text-white font-bold m-5"
+                      >
+                        EDIT POST
+                      </button>
 
                       <button
                         onClick={() => handleDeletePost(post._id, token)}

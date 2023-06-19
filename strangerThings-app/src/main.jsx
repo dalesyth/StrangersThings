@@ -9,7 +9,7 @@ import Logout from "./Components/Logout";
 import Posts from "./Components/Posts";
 import Register from "./Components/Register";
 import CreatePost from "./Components/CreatePost";
-
+import EditPost from "./Components/EditPost";
 import SendMessage from "./Components/SendMessage";
 
 const router = createBrowserRouter([
@@ -48,6 +48,10 @@ const router = createBrowserRouter([
         path: "SendMessage",
         element: <SendMessage />,
       },
+      {
+        path: "EditPost",
+        element: <EditPost />,
+      }
     ],
   },
 ]);
